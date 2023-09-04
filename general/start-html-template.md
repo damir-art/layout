@@ -1,4 +1,5 @@
 # Стартовый HTML-шаблон
+https://htmlacademy.ru/blog/html/free-html-template
 
     <!DOCTYPE html>
     <html lang="en">
