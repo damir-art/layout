@@ -1,20 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru-RU">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Заголовок страницы в OG">
+  <meta property="og:description" content="Описание страницы в OG">
+  <meta property="og:image" content="https://example.com/image.jpg">
+  <meta property="og:url" content="https://example.com/">
 </head>
 <body>
-  <nav></nav>
-  <header></header>
-  <main>
-    <section>
-      <div>
-        content
-      </div>
-    </section>
-  </main>
-  <footer></footer>
+
+<header class="section section--header">
+  <div class="container">
+    <div class="col">
+      <div class="logo">
+        <img src="img/logo.jpg" alt="Логотип сайта" width="100" height="100">
+      </div> <!-- logo -->
+    </div> <!-- col -->
+    <div class="col">
+      <div class="description">
+        Описание сайта
+      </div> <!-- description -->
+    </div> <!-- col -->
+  </div> <!-- container -->
+</header> <!-- header -->
+
+<div class="section section--menu">
+  <div class="container">
+    <nav class="menu">
+      <div class="menu__burger">x</div>
+      <ul class="menu__list">
+        <li class="menu__item">
+          <a class="menu__link" href="#">Главная</a>
+        </li>
+        <li class="menu__item menu__item--has">
+          <a class="menu__link" href="#">Главная</a>
+          <ul class="menu__sublist">
+            <li class="menu__subitem">
+              <a class="menu__sublink" href="#">Подпункт</a>
+            </li>
+            <li class="menu__subitem">
+              <a class="menu__sublink" href="#">Подпункт</a>
+            </li>
+            <li class="menu__subitem">
+              <a class="menu__sublink" href="#">Подпункт</a>
+            </li>
+          </ul>
+        </li>
+        <li class="menu__item">
+          <a class="menu__link" href="#">Главная</a>
+        </li>
+        <li class="menu__item">
+          <a class="menu__link" href="#">Главная</a>
+        </li>
+        <li class="menu__item">
+          <a class="menu__link" href="#">Главная</a>
+        </li>
+      </ul>
+    </nav> <!-- menu -->
+  </div> <!-- container -->
+</div> <!-- section--menu -->
+
 </body>
 </html>

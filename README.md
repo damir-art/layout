@@ -1,6 +1,7 @@
 # layout
 Руководство по верстке сайтов
 
+Курсы:
 - Классическая верстка, `classic`
   - схлопывание margin
   - схлопывание контейнера
@@ -13,11 +14,17 @@
   - grid
   - css properties
 - Google PageSpeed Insights, `pagespeed`
-- Общие решения, `general`
-  - стартовый HTML-шаблон, `start-html-template.md`
-  - категории контента, `content-categories.md`
-  - семантические теги, `semantic.md`
-- Разное, `other.md`
+
+Оглавление:
+- Курс классической верстки: `classic`
+- Компоненты страницы: `component`
+- О языке CSS: `css`
+- Примеры работ: `example`
+- Общие решения: `general`
+  - категории контента: `content-categories.md`
+  - медиазапросы: `media-query.md`
+  - семантические теги: `semantic.md`
+- Разное: `other.md`
 
 ## Visual Studio Code
-- Alt + Shift + F - форматирование кода
+- Alt + Shift + F - авто форматирование кода
