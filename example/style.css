@@ -11,77 +11,34 @@ body {
   font-optical-sizing: auto;
 }
 
+/* Список товаров */
+.goods {
+  background-color: #9b59b6;
+  font-size: 0; /* чтобы убрать пробелы между элементами */
+  overflow: hidden; /* чтобы у крайних элементов не выпадали margin */
+}
+.goods__item {
+  background-color: #f1c40f;
+  width: 300px;
+  display: inline-block;
+  font-size: 16px;
+}
+
+/* IMG */
+img {
+  height: auto;
+  max-width: 100%;
+}
+
 /* GRID */
 .section {
   padding: 24px 0;
 }
 .container {
-  display: flex;
+  /* display: flex; */
   justify-content: space-between;
   gap: 24px;
   align-items: center;
   max-width: 1200px;
   margin: 0 auto;
-}
-
-/* HEADER */
-.section--header {
-  background-color: rgba(52, 152, 219, 0.3);
-}
-
-/* LOGO */
-.logo {
-  display: flex;
-}
-
-/* MENU */
-.menu__burger {
-  display: none;
-}
-.menu__list, .menu__sublist {
-  margin: 0;
-  padding: 0;
-  /* list-style: none; */
-}
-.menu__item, .menu__subitem {
-  list-style: none;
-}
-.menu__list {
-  display: flex;
-  gap: 8px;
-}
-.menu__item {
-  padding: 8px 16px;
-  background-color: rgba(52, 152, 219, 0.3);
-}
-.menu__item--has {
-  position: relative;
-}
-.menu__sublist {
-  display: none;
-  /* margin-left: 16px; */
-  position: absolute;
-  margin-top: 8px;
-  margin-left: -16px;
-}
-.menu__item:hover .menu__sublist {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.menu__subitem {
-  padding: 8px 16px;
-  background-color: rgba(52, 152, 219, 0.3);
-}
-
-@media all and ( max-width: 1200px ) {
-  .menu__burger {
-    display: block;
-  }
-  .menu__list {
-    display: none;
-  }
-  .menu__burger:hover + .menu__list {
-    display: flex;
-  }
 }
