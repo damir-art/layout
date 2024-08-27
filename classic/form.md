@@ -2,6 +2,8 @@
 https://htmlacademy.ru/blog/html/form-template  
 https://www.youtube.com/watch?v=sszC4j4Wcpo
 
+- кнопкам обычно задают `display: inline-block`
+
 ## checkbox
 У чекбоксов есть состояния: отмечен, не отмечен. К этим состояниям можно привязаться через CSS.
 
