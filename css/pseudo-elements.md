@@ -26,6 +26,24 @@ after и before можно применять при обтекании элем
       padding: 4px 8px;
     }
 
+## Задаём иконку списку
+
+Первый способ через `background`:
+
+    .elem::before {
+      content: '';
+      display: block;
+      width: 50px;
+      height: 50px;
+      background
+    }
+
+Второй способ через `url`:
+
+    .elem::before {
+      content: url(../img/icon.png);
+    }
+
 ## Создаём треугольник
 Создаём треугольник и вставляем его перед строчным элементом. Созданному треугольнику добавляем `displaу: inline-block`.
 
@@ -38,3 +56,28 @@ after и before можно применять при обтекании элем
       border-right: 16px solid #ecf0f1;
       border-bottom: 8px solid transparent;
     }
+
+## Задаём полупрозрачный фон поверх изображения
+У section есть изображение, наложим на это изображение полупрозрачный фон:
+
+    section {
+      background: url("../img/header__background.jpg") no-repeat center;
+      padding: 128px 0;
+      position: relative;
+    }
+    section::before {
+      content: '';
+      display: block;
+      background-color: rgba(0, 0, 0, 0.5);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .container {
+      position: relative;
+      z-index: 2;
+    }
+
+По-умолчанию у элементов с `position` z-index = 1. Положительные числа ближе к человеку, отрицательные дальше. Контейнеру с текстом задайте `position: relative` и `z-index: 2`. У браузеров также есть еще цветовые CSS фильтры.
