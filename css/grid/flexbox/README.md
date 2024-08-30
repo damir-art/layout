@@ -5,6 +5,7 @@ https://dmitrylavrik.ru/training/process/flexbox-grid - тренажер
 `display: flex`
 - контейнер
 - ячейки контейнера, элементы
+- у флексбокса, элементы по-умолчанию занимают ширину по контенту, `flex-basis: auto;`
 
 Если `inline-block` мы задаем элемнтам внутри контейнера, то `display: flex` мы задаём контейнеру.
 

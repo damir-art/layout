@@ -42,3 +42,15 @@ img {
 .elem {
   width: calc( 100% / 4 - 32px);
 }
+
+/* list */
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.list__item {
+  flex-basis: 300px;
+  margin: 16px;
+  text-align: center;
+}
