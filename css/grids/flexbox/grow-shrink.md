@@ -5,6 +5,8 @@
 - можно при адаптиве убрать изображение и сделать его фоном у .col,
 - margin и размер шрифта заголовка задавать в `vw`,
 
+
+
 Пример решения:
 
     .row {
@@ -144,3 +146,131 @@ https://habr.com/ru/articles/473186/
         </div>
       </div>
     </section>
+
+## Еще пример адаптив без медиазапроса
+`Первый экран.` Стоят в ряду по два элемента. Элементы состоят из изображения и текста, изображение сверху, текст снизу.
+
+`Второй экран.` На планшете становятся в ряду по одному элементу, при этом на нечетных рядах изображение слева, а в четных справа, это делается через.
+
+    .posts-item:nth-child(2n){
+      flex-direction: row-reverse;
+    }
+
+Основной экран это `Второй экран` начинаем верстку с него.
+
+`Третий экран.` На самых маленьких экранах в ряду тоже по одному элементу, но изображение снова сверху, а текст снизу. Всю ширину занимают через flex-grow.
+
+Причиной переноса текста под картинку, является `flex-basis` у элементов и `flex-wrap: wrap` у обертки.  Ширина контейнера должна быть больше ширин флекс базисов элементов и gap, элементы полностью занимают пространство.
+
+    <section class="section-posts">
+      <div class="container">
+        <div class="posts-line">
+          <div class="posts-item">
+            <div class="posts-item__image">
+              <img src="img/about.png" alt="">
+            </div>
+            <div class="posts-item__text">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa sapiente hic eos suscipit illum? Reprehenderit, exercitationem facere aperiam accusantium.
+            </div>
+          </div>
+          <div class="posts-item">
+            <div class="posts-item__image">
+              <img src="img/about.png" alt="">
+            </div>
+            <div class="posts-item__text">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa sapiente hic eos suscipit illum? Reprehenderit, exercitationem facere aperiam accusantium.
+            </div>
+          </div>
+          <div class="posts-item">
+            <div class="posts-item__image">
+              <img src="img/about.png" alt="">
+            </div>
+            <div class="posts-item__text">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa sapiente hic eos suscipit illum? Reprehenderit, exercitationem facere aperiam accusantium.
+            </div>
+          </div>
+          <div class="posts-item">
+            <div class="posts-item__image">
+              <img src="img/about.png" alt="">
+            </div>
+            <div class="posts-item__text">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa sapiente hic eos suscipit illum? Reprehenderit, exercitationem facere aperiam accusantium.
+            </div>
+          </div>
+          <div class="posts-item">
+            <div class="posts-item__image">
+              <img src="img/about.png" alt="">
+            </div>
+            <div class="posts-item__text">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa sapiente hic eos suscipit illum? Reprehenderit, exercitationem facere aperiam accusantium.
+            </div>
+          </div>
+          <div class="posts-item">
+            <div class="posts-item__image">
+              <img src="img/about.png" alt="">
+            </div>
+            <div class="posts-item__text">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa sapiente hic eos suscipit illum? Reprehenderit, exercitationem facere aperiam accusantium.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    body{
+      margin: 0;
+    }
+
+    img{
+      max-width: 100%;
+      height: auto;
+    }
+
+    .container{
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    .section-posts{
+      background: #232324;
+      padding: 15px 0;
+    }
+
+    .posts-line{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+
+    .posts-item{
+      border: 1px solid #aaa;
+      border-radius: 10px;
+      padding: 10px;
+      box-sizing: border-box;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      flex: 1 1 400px; /* easy bem or not bem  */
+    }
+
+    .posts-item:nth-child(2n){
+      flex-direction: row-reverse;
+    }
+
+    .posts-item__image{
+      flex: 1 1 125px;
+    }
+
+    .posts-item__text{
+      color: #fff;
+      font-size: 20px;
+      flex: 3 1 375px;
+    }
+
+    .posts-item__image img{
+      display: block;
+    }
+
+## Разное
+flex-shrink = 0 ставим тогда когда размер элемента меньше ширины самого маленького экрана, или когда мы переопределяем размер элемента в адаптивке,  

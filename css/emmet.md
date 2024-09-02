@@ -15,3 +15,5 @@ https://docs.emmet.io/abbreviations/
         <li><a href="">Item 5</a></li>
       </ul>
     </div>
+
+[] - для атрибутов
