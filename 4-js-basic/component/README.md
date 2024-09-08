@@ -1,3 +1,4 @@
 # Компоненты JavaScript
 
-- слайдер `slider.md`
+- Слайдер `slider.md`
+- Кнопка вверх `button-up.md`

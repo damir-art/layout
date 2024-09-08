@@ -1,25 +1,14 @@
-window.onload = function() {
-  let text = document.querySelector('.text');
-  text.innerHTML = 'Имя';
+function init() {
+  let x = 100;
 
-  text.addEventListener(`click`, function() {
-    text.innerHTML += 1; // Имя11111
-  });
+  setTimeout(function() {
+    console.log(++x);
+  }, 3000);
 
-  text.addEventListener(`click`, function() {
-    text.innerHTML += 2; // Имя1212121212
-  });
+  setTimeout(function() {
+    console.log(++x);
+  }, 3000);
 }
 
-// window.addEventListener('load', function() {
-//   let text = document.querySelector('.text');
-//   text.innerHTML = 'Имя';
-
-//   text.addEventListener(`click`, function() {
-//     text.innerHTML += 1; // Имя11111
-//   });
-
-//   text.addEventListener(`click`, function() {
-//     text.innerHTML += 2; // Имя1212121212
-//   });
-// });
+init();
+console.log('init function is over');
