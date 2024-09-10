@@ -31,7 +31,7 @@ https://dmitrylavrik.ru/training/process/flexbox-grid - тренажер
 ## Сетка
 
     .section {
-      padding: 24px 0;
+      padding: 64px 0;
     }
     .container {
       max-width: 1200px;
@@ -39,16 +39,16 @@ https://dmitrylavrik.ru/training/process/flexbox-grid - тренажер
       padding: 0 32px;
     }
     .row {
-      margin: 0 -16px;
       display: flex;
-      flex-wrap: wrap; /* почти всегда нужен */
-      /* justify-content: space-between;
       gap: 24px;
-      align-items: center; */
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 0 -16px;
+
     }
     .col {
-      margin-left: 16px;
-      margin-right: 16px;
+      padding: 0 16px;
       box-sizing: border-box;
     }
     .col.elem {

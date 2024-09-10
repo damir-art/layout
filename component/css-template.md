@@ -1,84 +1,82 @@
 # Стартовый CSS-шаблон
 
-    @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+    /* FONT */
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-    /* CSS переменные: цвета, отступы */
-    :root{
-      --green: #1D9D73;
-      --offset: 15px;
+    :root {
+      --mainColor: #2d3436;
+      --mainColorDark: #21292a;
+      --mainColorTransparent: rgba(45, 52, 54, 0.6);
+      --mainColorSectionTransparent: rgba(45, 52, 54, 0.1);
+
+      --bodyBackground: #ecf0f1;
+
+      --buttonColor: #ae2116;
+      --buttonColorHover: rgba(174, 33, 22, 0.8);
+
+      --fontSize: 16px;
+      --offset: 32px;
     }
 
+    /* GENERAL */
     body {
-      margin: 0;
-      color: #333333;
-      background-color: #ecf0f1;
-      font-family: "Rubik", sans-serif;
+      color: var(--mainColor);
+      background-color: var(--bodyBackground);
+      font-family: "Montserrat", Arial, sans-serif;
       font-size: 16px;
-      font-weight: 300;
-      font-style: normal;
       font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal;
+      margin: 0;
+      padding: 0;
     }
 
-    /* reset.css */
     img {
       max-width: 100%;
       height: auto;
     }
 
-    h1, h2, h3, h4, h5, h6, p, ul, li {
+    h1, h2, h3, h4 {
       margin: 0;
-      font-size: 100%;
-      font-weight: normal;
+      padding: 0;
     }
 
     ul, ol {
       list-style: none;
+      margin: 0;
       padding: 0;
     }
 
-    strong {
-      font-weight: normal;
+
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
     }
 
-    em {
-      font-style: normal;
+    nav ul {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
     }
 
-    /* base.css */
-    h1, h2, h3, .h1, .h2, .h3 {
-      font-weight: 300;
-      color: #333;
+    nav li {
+      margin: 0 10px;
     }
 
-    h1, .h1 {
-      font-size: 55px;
-      margin: 30px 0;
+    nav a {
+      color: #fff;
+      text-decoration: none;
     }
 
-    h2, .h2 {
-      font-size: 35px;
-      margin: 20px 0;
+    nav a:hover {
+      color: #000;
     }
 
-    h3, .h3 {
-      font-size: 26px;
-      margin: 16px 0;
-    }
-
-    strong, .strong {
-      font-weight: 400;
-    }
-
-    em, .em {
-      font-weight: 300;
-      font-style: italic;
-    }
-
-    p {
-      font-weight: 300;
-      margin: 0 16px;
-    }
-
+    /* BUTTON */
     .button {
       display: inline-block;
       padding: 8px 16px;
@@ -86,33 +84,106 @@
       text-decoration: none;
       border-radius: 4px;
     }
-
     .button--green {
-      color: #ffffff;
-      background-color: #1d9d73;
+      color: var(--bodyBackground);
+      background-color: var(--buttonColor);
     }
 
-    /* etc */
-    /* .content-text класс обёртка редактора в CMS */
-    .content-text ul {
-      list-style-type: disc;
-      padding-left: 50px;
+    /* FORM */
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
     }
 
-    /* grid */
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      outline: none;
+    }
+
+    /* IMG */
+    .image-block {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .image-block img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* TEXT */
+    .text-block {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .text-block p {
+      margin: 0;
+      padding: 0;
+    }
+
+    /* BUTTON */
+    .button-block {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .button-block button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      background-color: #000;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .button-block button:hover {
+      background-color: #333;
+    }
+
+    /* GRID */
+    .section {
+      padding: 64px 0;
+    }
     .container {
-      max-width: 1170px;
-      padding: 30px;
+      max-width: 1200px;
       margin: 0 auto;
+      padding: 0 32px;
     }
-
     .row {
       display: flex;
+      gap: 24px;
+      justify-content: space-between;
+      align-items: center;
       flex-wrap: wrap;
-      margin: 0 -15px;
-    }
+      margin: 0 -16px;
 
+    }
     .col {
-      margin: 15px;
+      padding: 0 16px;
       box-sizing: border-box;
+    }
+    .col.elem-1 {
+      width: calc( 100% / 1 - 32px);
+    }
+    .col.elem-2 {
+      width: calc( 100% / 2 - 32px);
+    }
+    .col.elem-3 {
+      width: calc( 100% / 3 - 32px);
+    }
+    .col.elem-4 {
+      width: calc( 100% / 4 - 32px);
     }
