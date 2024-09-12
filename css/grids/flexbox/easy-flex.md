@@ -1,24 +1,46 @@
 # Простые флексы
-Самая правильна сетка:
+Самая правильна сетка offset = 16px:
 
     .container {
-      max-width: 1280px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 0 32px; /* не дают подходить к краям экрана */
+      padding: 0 var(--offset); /* не дают подходить к краям экрана */
     }
     .row {
       display: flex;
       flex-wrap: wrap;
-      margin: 0 -16px; /* маржин положительный от .col проваливается в маржин отрицательны от .row */
-      /* justify-content: space-between;
-      gap: 24px;
-      align-items: center; */
+      margin: 0 calc(var(--offset) * -1); /* маржин положительный от .col проваливается в маржин отрицательны от .row */
+      /* 
+        justify-content: space-between;
+        gap: 24px;
+        align-items: center;
+      */
     }
     .col {
-      margin-left: 16px;
-      margin-right: 16px;
+      padding: 0 var(--offset);
+      /* margin: 0 var(--offset); */
       box-sizing: border-box;
     }
+
+    .col.col--12 {
+      width: calc( 100% / 12 * 12 - var(--offset) * 2);
+    }
+    .col.col--6 {
+      width: calc( 100% / 12 * 6 - var(--offset) * 2);
+    }
+    .col.col--4 {
+      width: calc( 100% / 12 * 4 - var(--offset) * 2);
+    }
+    .col.col--3 {
+      width: calc( 100% / 12 * 3 - var(--offset) * 2);
+    }
+    .col.col--2 {
+      width: calc( 100% / 12 * 2 - var(--offset) * 2);
+    }
+    .col.col--1 {
+      width: calc( 100% / 12 * 1 - var(--offset) * 2);
+    }
+
     .col.elem {
       width: calc( 100% / 12 * 1 - var(--offset) * 2);
     }
@@ -26,7 +48,7 @@
 Где вместо `1` ставят количество колонок. В медиазапросах меняем только `1` на другое число.
 
 ## Что не так с gap?
-Нечего вычитать: width: calc( 100% / 12 * 3 - `var(--offset) * 2`); - элемент не сможет напримур тут занять ровно четверть экрана. Надо в этом случае начинать думать сколько элементов в строке и сколько между ними зазоров.
+Нечего вычитать: width: calc( 100% / 12 * 3 - `var(--offset) * 2`); - элемент не сможет например тут занять ровно четверть экрана. Надо в этом случае начинать думать сколько элементов в строке и сколько между ними зазоров.
 
 Если элементов 4 и между ними по 30px, то надо 90 / 4 = 22,5
 

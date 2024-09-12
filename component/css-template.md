@@ -15,7 +15,7 @@
       --buttonColorHover: rgba(174, 33, 22, 0.8);
 
       --fontSize: 16px;
-      --offset: 32px;
+      --offset: 16px;
     }
 
     /* GENERAL */
@@ -157,33 +157,43 @@
     .section {
       padding: 64px 0;
     }
+
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 32px;
+      padding: 0 var(--offset);
     }
     .row {
       display: flex;
-      gap: 24px;
+      // gap: 24px;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      margin: 0 -16px;
-
+      margin: 0 calc(var(--offset) * -1);
     }
     .col {
-      padding: 0 16px;
+      padding: 0 var(--offset);
       box-sizing: border-box;
     }
-    .col.elem-1 {
-      width: calc( 100% / 1 - 32px);
+    .col.col--12 {
+      width: calc( 100% / 12 * 12 - var(--offset) * 2);
     }
-    .col.elem-2 {
-      width: calc( 100% / 2 - 32px);
+    .col.col--6 {
+      width: calc( 100% / 12 * 6 - var(--offset) * 2);
     }
-    .col.elem-3 {
-      width: calc( 100% / 3 - 32px);
+    .col.col--4 {
+      width: calc( 100% / 12 * 4 - var(--offset) * 2);
     }
-    .col.elem-4 {
-      width: calc( 100% / 4 - 32px);
+    .col.col--3 {
+      width: calc( 100% / 12 * 3 - var(--offset) * 2);
+    }
+    .col.col--2 {
+      width: calc( 100% / 12 * 2 - var(--offset) * 2);
+    }
+    .col.col--1 {
+      width: calc( 100% / 12 * 1 - var(--offset) * 2);
+    }
+
+    .col.elem {
+      width: calc( 100% / 12 * 1 - var(--offset) * 2);
     }
