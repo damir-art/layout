@@ -9,10 +9,32 @@
 <body>
 
 <div class="container">
-  <div class="text">
-    Привет!
-  </div>
+  <select id="fruits">
+    <option value="apple">Яблоко</option>
+    <option value="banana">Банан</option>
+    <option value="orange">Апельсин</option>
+  </select>
 </div>
+
+<script>
+let selectElement = document.getElementById('fruits');
+let selectedIndex = selectElement.selectedIndex;
+let selectedValue = selectElement.options[selectedIndex].value;
+
+switch (selectedValue) {
+  case 'apple':
+    console.log('Вы выбрали яблоко.');
+    break;
+  case 'banana':
+    console.log('Вы выбрали банан.');
+    break;
+  case 'orange':
+    console.log('Вы выбрали апельсин.');
+    break;
+  default:
+    console.log('Вы выбрали неизвестный фрукт.');
+}
+</script>
 
 <script src="custom.js"></script>
 </body>
