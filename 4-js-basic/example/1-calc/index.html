@@ -16,7 +16,7 @@
 <div class="calc">
   <input type="text" class="num1">
   <select id="calc__list">
-    <option value="sum">+</option>
+    <option value="sum" selected="selected">+</option>
     <option value="min">-</option>
     <option value="mult">*</option>
     <option value="div">/</option>
@@ -33,30 +33,50 @@ window.addEventListener('load', function() {
   let btnRun = document.querySelector('.btnRun');
   let resultBox = document.querySelector('.result');
 
+  let selectElement = document.getElementById('calc__list');
+
   btnRun.addEventListener('click', function() {
-    let total = parseInt(inp1.value) + parseInt(inp2.value);
-    resultBox.innerHTML = total;
+    let selectedValue = selectElement.options[selectElement.selectedIndex].value;
+
+    switch (selectedValue) {
+      case 'sum':
+        let sum = parseInt(inp1.value) + parseInt(inp2.value);
+        resultBox.innerHTML = sum;
+        console.log(`Сумма чисел равна: ${sum}`);
+        break;
+      case 'min':
+        let min = parseInt(inp1.value) - parseInt(inp2.value);
+        resultBox.innerHTML = min;
+        console.log(`Вычитание чисел равно: ${min}`);
+        break;
+      case 'mult':
+        let mult = parseInt(inp1.value) * parseInt(inp2.value);
+        resultBox.innerHTML = mult;
+        console.log(`Умножение чисел равно: ${mult}`);
+        break;
+      case 'div':
+        let div = parseInt(inp1.value) / parseInt(inp2.value);
+        resultBox.innerHTML = div;
+        console.log(`Деление чисел равно: ${div}`);
+        break;
+      default:
+        console.log('Неизвестная ошибка.');
+    }
+
+    btnRun.disabled = true;
   });
 
-  let selectElement = document.getElementById('calc__list');
-  let selectedValue = selectElement.options[selectElement.selectedIndex].value;
-  console.log(selectedValue);
 
-  switch (selectedValue) {
-    case 'sum':
-      console.log('Вы выбрали суммирование.');
-      break;
-    case 'min':
-      console.log('Вы выбрали вычитание.');
-      break;
-    case 'mult':
-      console.log('Вы выбрали умножение.');
-      break;
-    case 'div':
-      console.log('Вы выбрали деление.');
-      break;
-    default:
-      console.log('Неизвестная ошибка.');
+  // Добавляем обработчик события input
+  inp1.addEventListener('input', inputChange);
+  inp2.addEventListener('input', inputChange);
+
+  function inputChange() {
+    btnRun.disabled = false;
+    // Регулярное выражение для замены всех символов, кроме цифр, пустой строкой
+    const regex = /[^0-9]/g;
+    // Обновляем значение поля, удаляя все несоответствующие символы
+    this.value = this.value.replace(regex, '');
   }
 });
 </script>
