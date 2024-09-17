@@ -78,6 +78,54 @@ window.addEventListener('load', function() {
     // Обновляем значение поля, удаляя все несоответствующие символы
     this.value = this.value.replace(regex, '');
   }
+
+
+  /* Рефакторинг кода */
+  selectElement.addEventListener('change', function() {
+    console.log( this.value ); // выводит value выбранного элемента
+  });
+  // соотвественно внутри обработчика события клик прописываем
+  switch (selectElement.value) {
+
+  }
+  // Рефакторинг switch, чтобы строки не повторялись
+  // Внутри события click прописывем
+  let a = +inp1.value;
+  let b = +inp2.value;
+  let operator = selectElement.value;
+  let result = calc(a, b, operator); // result записываем в .result
+
+  if(isNaN(result)) {
+    result = "Не число";
+  }
+
+  resultBox.innerHTML = result;
+
+  // функцию calc выносим за событие
+  function calc(a, b, operator) {
+    switch (operator) {
+      case 'sum':
+        return a + b;
+        break;
+      case 'min':
+      return a - b;
+        break;
+      case 'mult':
+      return a * b;
+        break;
+      case 'div':
+      return a / b;
+        break;
+      default:
+        console.log('Неизвестная ошибка.');
+    }
+  }
+
+  /* Рефакторинг одинаковых событий */
+  // inp1.addEventListener('input', inputChange);
+  // inp2.addEventListener('input', inputChange);
+  // [ inp1, inp2, inp3 ].forEach( el => el.addEventListener('input', inputChange) );
+
 });
 </script>
 

@@ -1,6 +1,15 @@
 # Циклы
 Циклы, итерации, итераторы.
 
+Методы перебора массива: https://www.youtube.com/watch?v=cGA3N5coak4
+- forEach
+- filter
+- map
+- every
+- some
+- reduce
+- reduceRight
+
 Проходимся циклом по элементам и вешаем элементам событие и обработчик.
 
     window.addEventListener('load', function() {

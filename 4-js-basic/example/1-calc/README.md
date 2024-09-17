@@ -1,5 +1,4 @@
-# Домашнее задание №1
-`example/1-calc/`
+# Домашнее задание №1 (создание калькулятора)
 - Создать калькулятор с 4 операциями (+, -, *, /).
 - Для выбора операции используйте тег `select`.
 - В калькуляторе после выполнения действия блокировать кнопку `=` до тех пор, пока пользователь не изменит введённые данные.
@@ -13,8 +12,14 @@
     }
 
     <!-- HTML -->
-    <div class="calculator">
-      <input type="text" class="num1"> + 
+    <div class="calc">
+      <input type="text" class="num1">
+      <select id="calc__list">
+        <option value="sum" selected="selected">+</option>
+        <option value="min">-</option>
+        <option value="mult">*</option>
+        <option value="div">/</option>
+      </select>
       <input type="text" class="num2">
       <button type="button" class="btnRun">=</button>
       <span class="result"></span>

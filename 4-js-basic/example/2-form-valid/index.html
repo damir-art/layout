@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Валидация формы</title>
+</head>
+<body>
+
+<style>
+  .container {
+    width: 1200px;
+    margin: 0 auto;
+  }
+  .err{
+    outline: 1px solid red;
+  }
+</style>
+
+<div class="container">
+  <form class="form">
+    Имя:<br />
+    <input type="text" name="name" class="form__check"><br /><br />
+    Телефон:<br />
+    <input type="text" name="phone" class="form__check"><br /><br />
+    Почта:<br />
+    <input type="text" name="email" class="form__check"><br /><br />
+    <input type="submit" class="form__submit" value="Отправить">
+  </form>
+</div>
+
+<script>
+let formSubmit = document.querySelector('.form__submit');
+let formChecks = document.querySelectorAll('.form__check');
+
+formSubmit.addEventListener('click', function(evt) {
+  for(let i = 0; i < formChecks.length; i++) {
+    console.log(formChecks[i]);
+    if(formChecks[i].value == '') {
+      formChecks[i].classList.add('err');
+      evt.preventDefault();
+    }
+  }
+});
+
+</script>
+
+</body>
+</html>
