@@ -13,7 +13,7 @@
       outline: 1px solid red;
     }
 
-    <form>
+    <form class="form">
       Имя:<br />
       <input type="text" name="name" class="check"><br />
       Телефон:<br />
@@ -22,3 +22,10 @@
       <input type="text" name="email" class="check"><br />
       <input type="submit" value="Отправить">
     </form>
+
+Решение см. otvet.png
+
+## Разное
+- при валидации, регулярное выражение берут из data атрибута `data-reg = "/reg/"`
+- затем добавляют его в конструктор Reg, чтобы его тип данных не был строкой
+- let reg = new RegExp( input.dataset.reg, 'модификатор' );

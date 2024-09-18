@@ -20,28 +20,18 @@
 <div class="container">
   <form class="form">
     Имя:<br />
-    <input type="text" name="name" class="form__check"><br /><br />
+    <input type="text" name="name" class="form__text"><br /><br />
     Телефон:<br />
-    <input type="text" name="phone" class="form__check"><br /><br />
+    <input type="text" name="phone" class="form__text"><br /><br />
     Почта:<br />
-    <input type="text" name="email" class="form__check"><br /><br />
-    <input type="submit" class="form__submit" value="Отправить">
+    <input type="text" name="email" class="form__text"><br /><br />
+    <input type="submit" value="Отправить">
   </form>
 </div>
 
 <script>
-let formSubmit = document.querySelector('.form__submit');
-let formChecks = document.querySelectorAll('.form__check');
-
-formSubmit.addEventListener('click', function(evt) {
-  for(let i = 0; i < formChecks.length; i++) {
-    console.log(formChecks[i]);
-    if(formChecks[i].value == '') {
-      formChecks[i].classList.add('err');
-      evt.preventDefault();
-    }
-  }
-});
+let form = document.querySelector('.form');
+let formText = document.querySelectorAll('.form__text');
 
 </script>
 
