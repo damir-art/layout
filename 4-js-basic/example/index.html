@@ -9,53 +9,99 @@
 <body>
 
 <style>
-  .item{
-    margin: 5px 0;
-  }
 </style>
 
 <div class="container">
-  <button type="button" class="btnAdd">Add item</button>
-  <hr>
-  <div class="box">
-    <div class="item">Text 1</div>
-    <div class="item">Text <span>2</span></div>
-    <div class="item">Text 3</div>
-    <div class="item">Text 4</div>
-    <div class="item">Text 5</div>
+  <div class="calculator">
+    <input type="text" class="num1">
+    <select class="operation">
+      <option value="sum">+</option>
+      <option value="sub">-</option>
+      <option value="mult">*</option>
+      <option value="div">/</option>
+    </select>
+    <input type="text" class="num2">
+    <button type="button" class="btnRun">=</button>
+    <span class="result"></span>
   </div>
 </div>
 
 <script>
 window.addEventListener('load', function() {
-  let btnAdd = document.querySelector('.btnAdd');
-  let box = document.querySelector('.box');
+  let calculator = document.querySelector('.calculator');
+  let inp1 = document.querySelector('.num1');
+  let inp2 = document.querySelector('.num2');
+  let btnRun = document.querySelector('.btnRun');
+  let resultBox = document.querySelector('.result');
+  let operation = document.querySelector('.operation');
+  // Также этот код можно использовать для генерации option в теге select
+  let mathOps = {
+    sum: (a, b) => a + b,
+    sub: (a, b) => a - b,
+    mult: (a, b) => a * b,
+    div: (a, b) => a / b,
+  };
 
-  // При клике внутри контейнера, обрамляющего элементы
-  // Мы проверяем есть ли элемента в районе которого произошел клик, класс .item
-  // Если да, то этот элемент передаём в обработчик
-  box.addEventListener('click', function(evt) {
-    // console.log(this); // элемент .box, событие в контексте .box
-    // console.log( evt.target ); // элемент по которому произошел клик (кто породил событие), div или span, при этом контекстом всё равно является .box
+  btnRun.addEventListener('click', function() {
+    let num1 = parseInt(inp1.value);
+    let num2 = parseInt(inp2.value);
+    let total = mathOps[operation.value](num1, num2);
 
-    if(evt.target.classList.contains('item')) {
-      changeColor(evt.target);
+    if(isNaN(total)) {
+      total = 'Некорректный ввод';
     }
+
+    resultBox.innerHTML = total;
+    btnRun.disabled = true;
   });
 
-  btnAdd.addEventListener('click', function(){
-    let div = document.createElement('div');
-    div.classList.add('item');
-    div.innerHTML = 'Text ' + (box.children.length + 1);
-    box.appendChild(div);
+  delegate(calculator, 'input,select', 'input', function() {
+    btnRun.disabled = false;
+  });
+
+  delegate(calculator, '.num1,.num2', 'input', function() {
+    this.value = this.value.replace(/[^0-9]/g, '');
   });
 });
 
-function changeColor(elem) {
-  let colors = ['#f00', '#ff0', '#0f0'];
-  let num = Math.floor(Math.random() * colors.length);
-  elem.style.color = colors[num];
+function delegate(box, selector, eventName, handler) {
+  box.addEventListener(eventName, function(e) {
+    let elem = e.target.closest(selector);
+
+    if(elem !== null && box.contains(elem)) {
+      handler.call(elem, e);
+    }
+  });
 }
+
+/*
+  // расшифровка
+  let v = operation.value;
+  let fn = mathOps[v];
+  let total = fn(num1, num2);
+*/
+
+/*
+  // Функции от простой к стрелочной
+  function sum(a, b) {
+    return a + b
+  }
+
+  let sum = function(a, b) {
+    return a + b
+  }
+
+  let sum = (a, b) => {
+    return a + b
+  }
+
+  let sum = (a, b) => a + b;
+*/
+
+/*
+  // при фильтрации массивов со стрелочными функциями, получается короткий код
+  [10, 5, 8, 9, 1].filter(num => num > 5)
+*/
 </script>
 
 <script src="custom.js"></script>

@@ -5,6 +5,10 @@
     elem.addEventListener('input', disabledBtn);
     elem.addEventListener('input', leaveNumbers);
 
+disabledBtn() - функция которая запускается в контексте элемента `elem`,  
+`this` указывает на elem,  
+`evt` - описывает событие.
+
 ## В чем разница между событиями load и DOMContentLoaded в JavaScript?
 Разница между событиями `load` и `DOMContentLoaded` в JavaScript заключается в следующем:
 
