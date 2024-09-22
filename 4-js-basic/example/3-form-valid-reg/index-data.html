@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+<style>
+.err{
+  outline: 1px solid red;
+}
+</style>
+
+<div class="container">
+  <form class="form">
+    Имя<br><input type="text" name="firstname" class="check" data-rule="name"><br>
+    Телефон<br><input type="text" name="phone" class="check" data-rule="phone"><br>
+    Почта<br><input type="text" name="email" class="check" data-rule="email"><br>
+    Почта Доп<br><input type="text" name="email-adddional" class="check" data-rule="email"><br>
+    <input type="submit" value="Отправить">
+  </form>
+</div>
+
+<script>
+// Пример с использованием дата атрибутов
+// Бэкенд програмист использует атрибуты name у элементов формы, а фронтенд использует data-атрибуты
+// что позволяет не привязываться к бэкенду и проблеме дубля полей (потому что два одинаковых name быть не должно)
+window.addEventListener('load', function() {
+  let form = document.querySelector('.form');
+  let inputs = form.querySelectorAll('.check');
+  let validation = {
+    name: /^.{2,32}$/,
+    phone: /^\d{7,15}$/,
+    email: /^.+@.+\..+$/
+  };
+
+  form.addEventListener('submit', function(e) {
+    let hasError = false;
+    
+    for(let i = 0; i < inputs.length; i++) {
+      let inp = inputs[i]; // тут дубль в оперативке не создаётся (ибо не простое значение), присваивание происходит по ссылке
+      let pattern = validation[inp.dataset.rule];
+
+      if(!pattern.test(inp.value)) {
+        inp.classList.add('err');
+        hasError = true;
+      }
+    }
+
+    if(hasError) {
+      e.preventDefault();
+    }
+  });
+
+  form.addEventListener('focusin', function(e) {
+    if(e.target.classList.contains('check')) {
+      e.target.classList.remove('err');
+    }
+  });
+});
+
+</script>
+</body>
+</html>

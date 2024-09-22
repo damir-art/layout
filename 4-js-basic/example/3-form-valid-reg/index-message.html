@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+<style>
+.err{
+  outline: 1px solid red;
+}
+.error-message{
+  color: red;
+  font-size: 14px;
+}
+</style>
+
+<div class="container">
+  <form class="form">
+    <div class="form_input_box">
+      <div>Имя</div>
+      <div>
+        <input type="text" name="firstname" class="check" data-rule="name">
+      </div>
+      <div class="error-message"></div> <!-- Дивы для вывода сообщений, нужно готовить заранее -->
+    </div>
+    <div class="form_input_box">
+      <div>Телефон</div>
+      <div>
+        <input type="text" name="phone" class="check" data-rule="phone">
+      </div>
+      <div class="error-message"></div>
+    </div>
+    <div class="form_input_box">
+      <div>Почта</div>
+      <div>
+        <input type="text" name="email" class="check" data-rule="email">
+      </div>
+      <div class="error-message"></div>
+    </div>
+    <input type="submit" value="Отправить">
+  </form>
+</div>
+
+<script>
+window.addEventListener('load', function() {
+
+  let form = document.querySelector('.form');
+  let inputs = form.querySelectorAll('.check');
+  let validation = {
+    // Создаём вложенные объекты
+    name: {
+      pattern: /^.{2,32}$/,
+      errorText: 'От 2 до 32 символов'
+    },
+    phone: {
+      pattern: /^\d{7,15}$/,
+      errorText: 'Только цифры, от 7 до 15'
+    },
+    email: {
+      pattern: /^.+@.+\..+$/,
+      errorText: 'Введите корректный email'
+    }
+  };
+
+  form.addEventListener('submit', function(e) {
+    let hasError = false;
+
+    for(let i = 0; i < inputs.length; i++) {
+      let inp = inputs[i];
+      let rule = validation[inp.dataset.rule];
+
+      // Проверка на существование rule
+      if(rule !== undefined && !rule.pattern.test(inp.value)) {
+        inp.classList.add('err');
+        hasError = true;
+        showError(inp, rule.errorText);
+      }
+    }
+
+    if(hasError) {
+      e.preventDefault();
+    }
+  });
+
+  form.addEventListener('focusin', function(e) {
+    if(e.target.classList.contains('check')) {
+      e.target.classList.remove('err');
+      showError(e.target, '');
+    }
+  });
+});
+
+// Функция принимает инпут для которого нужно показать ошибку и сообщение об ошибке
+// Далее от input переходим к див с сообщением
+function showError(input, message) {
+  // Можно использовать nextElementSibling,
+  // но лучше искать элементы через общего родителя,
+  // чтобы при добавлении новых тегов в форму ничего не рухнуло
+  let box = input.closest('.form_input_box');
+  let msgBox = box.querySelector('.error-message');
+  msgBox.innerHTML = message;
+}
+</script>
+</body>
+</html>
