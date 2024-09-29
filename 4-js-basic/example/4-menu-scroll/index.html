@@ -1,31 +1,10 @@
-# Создаём меню
-При клике на пункты меню переходим к секциям по якорям на главной:
-- делаем переход от ссылки к заголовку секции плавным
-- при переходе не точно попадаем в координаты, потому что хотелось бы чтобы при переходе оставался зазор между заголовком и верхней границей браузера
-- делаем меню фиксированным, однако в этом случаем координаты при переходе еще больше сбиваются
-
-Делаем на JavаScript:
-- плавный скрол
-- скрол идет до нужной точки (в нужные координаты)
-- пункт меню по которым был клик подсвечивается, становится активным
-- при этом при скроле страницы колесом мыши, пункты меню подсвечиваются сами по себе
-
-Схема создания кода:
-- подписываемся на клик по ссылкам меню, используем функцию delegate(),
-
-Пояснения к коду:
-
-Код `document.querySelector(this.hash)` ищет элемент на странице, который соответствует значению хеш-фрагмента (hash) текущего URL. Этот метод используется для навигации по странице, когда пользователь переходит по внутренним ссылкам, содержащим хеш-фрагменты. Например, если у вас есть ссылка `<a href="#section-1">Перейти к разделу 1</a>`, то при нажатии на неё, если страница уже загружена, произойдёт перемещение к элементу с идентификатором `section-1`, который может быть определён как `<div id="section-1">`.
-
-Вниз на 1000 пикселей:
-
-    window.scrollTo({
-      1000,
-      behavior: "smooth"
-    });
-
-CSS:
-
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1</title>
+    <link href="css/styles.css" rel="stylesheet">
     <style>
       html, body {
         margin: 0;
@@ -53,10 +32,26 @@ CSS:
       .content {
         margin-top: 70px;
       }
+      .btnUp {
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        line-height: 50px;
+        height: 50px;
+        width: 50px;
+        text-align: center;
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        cursor: pointer;
+        display: none;
+      }
+      .btnUp-open{
+        display: block;
+      }
     </style>
-
-HTML:
-
+  </head>
+  <body>
+    <div class="btnUp">&uarr;</div>
     <div class="menu">
       <a href="index.html#about" class="menu__link menu__link-active">О курсе</a>
       <a href="index.html#price" class="menu__link">Стоимость</a>
@@ -127,61 +122,74 @@ HTML:
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
       <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>     
     </div>
-
+    <script src="js/scripts.js"></script>
     <script>
-    window.addEventListener('load', function() {
-      // Получаем доступ к меню
+      window.addEventListener('load', function(){
       let menu = document.querySelector('.menu');
+      let btnUp = document.querySelector('.btnUp');
 
-      // С помощью функции delegate() получаем доступ к ссылкам меню
-      delegate(menu, 'a', 'click', function(e) {
-        e.preventDefault(); // отменяем клик по ссылке
+      delegate(menu, 'a', 'click', function(e){
+        e.preventDefault();
 
-        // получаем доступ к якорю у ссылки
-        let target = document.querySelector(this.hash); // указывает на элемент страницы у которого id равен хэшу страницы, в нашем случае это заголовки
-        scrollToElem(target); // отправляем заголовок в эту функцию и вычисляем его координату y
+        let target = document.querySelector(this.hash);
+        scrollToElem(target);
         setActiveMenuItem(menu, this);
       });
 
-      // Прямой переход по ссылке с хэшем, там где > проверяем имеется ли у ссылки хэш
-      // Без кода ниже, при прямом переходе, заголовок будет скрываться меню, не будет (-70)
       let hash = window.location.hash;
       let autoTarget = hash.length > 0 ? document.querySelector(hash) : null;
-      // console.log(autoTarget);
 
-      if(autoTarget !== null) {
+      if(autoTarget !== null){
         scrollToElem(autoTarget);
         setActiveMenuItem(menu, menu.querySelector(`[href$="${hash}"]`));
-        // menu.querySelector(`[href$="${hash}"]`) - чтобы подсветить ссылку при переходе из вне
       }
+
+      // При клике по кнопке, страница просколится вверх
+      btnUp.addEventListener('click', function(){
+        scrollToY(0);
+      });
+
+      // Если проскролено больше чем половина высоты окна, то тогда появляется кнопка
+      document.addEventListener('scroll', function(){
+        let cl = btnUp.classList;
+        let threshold = window.innerHeight / 2; // пролистали половину окна
+        window.scrollY > threshold ? cl.add('btnUp-open') : cl.remove('btnUp-open');
+      });
     });
 
-    // Функция delegate()
-    function delegate(box, selector, eventName, handler) {
-      box.addEventListener(eventName, function(e) {
+    function delegate(box, selector, eventName, handler){
+      box.addEventListener(eventName, function(e){
         let elem = e.target.closest(selector);
 
-        if(elem !== null && box.contains(elem)) {
+        if(elem !== null && box.contains(elem)){
           handler.call(elem, e);
         }
       });
     }
 
-    // Подсвечиваем активные пункты меню
-    function setActiveMenuItem(menu, item) {
+    function setActiveMenuItem(menu, item){
       menu.querySelectorAll('a').forEach(link => link.classList.remove('menu__link-active'));
       item.classList.add('menu__link-active');
     }
+    
+    // Скролинг до заголовков
+    function scrollToElem(el){
+      let cords = el.getBoundingClientRect();
+      let contentStyles = window.getComputedStyle(document.querySelector('.content'));
+      let shift = parseInt(contentStyles.marginTop);
+      let top = window.scrollY + cords.top - shift; // window.scrollY + cords.top = абсолютная координата
+      scrollToY(top);
+    }
 
-    // Перемещаемся к заголовку, предварительно вычислив его координату Y
-    function scrollToElem(el) {
-      let top = el.offsetTop - 70; // лучше использовать getBoundingClientRect()
-
+    // Функция которая скролит, либо к заголовкам либо вверх, в зависимости от top
+    function scrollToY(top){
       window.scrollTo({
         top,
         behavior: "smooth"
       });
     }
     </script>
+  </body>
+</html>

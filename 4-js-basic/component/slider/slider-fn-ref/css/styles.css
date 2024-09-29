@@ -1,0 +1,29 @@
+html, body, ul, li{
+	margin: 0;
+	padding: 0;
+}
+
+.gallery{
+	width: 860px;
+	margin: 0 auto;
+	text-align: center;
+	overflow-x: hidden;
+}
+
+.gallery .photos{
+	position: relative;
+	height: 670px;
+}
+
+.gallery .photos img{
+	width: 100%;
+	position: absolute;
+	left: 0;
+	transform: translateX(-100%);
+	/* opacity: 0.3; */
+}
+
+.gallery .photos img.showed{
+	transform: translateX(0);
+	/* opacity: 1; */
+}
