@@ -22,5 +22,33 @@
   <footer class="layout__footer">footer</footer>
 </div>
 
+<script>
+const cat = {
+  mustache: true,
+  getVoice: function() {
+    return 'myauMyauMyau';
+  }
+}
+
+const dog = {
+  mustache: false,
+  getVoice: function() {
+    return 'auAuAu';
+  }
+}
+
+const animal = {
+  age: 10,
+  getEat: function() {
+    return 'hrumHrumHrum';
+  }
+}
+
+console.log(cat);
+// cat.__proto__ = animal;
+console.log(cat);
+console.log( cat.getEat() ); // обращаемся к методу прототипа
+</script>
+
 </body>
 </html>
