@@ -167,10 +167,191 @@ constructor - в конструкторе класса, устанавливаю
     console.log( cat.getEat() ); // обращаемся к методу прототипа
 
 В JavaScript наследование идет не от класса к классу, а от объекта к объекту.  
-При обращении к какому-нибудь свойству объекта, свойство сначала ищется в объекте, затем если оно не находится, поиск начинается в прототипе.  
+При обращении к какому-нибудь свойству объекта, свойство сначала ищется в объекте, затем если оно не находится, поиск начинается в прототипе, а затем в прототипе прототипа и т.д. до Object  
 `__proto__` ссылка на объект animal.  
 animal - прототипа кота.  
 У каждого объекта есть прототип, можно создавать цепочки из прототипов.  
 Прототип это объект.
 
-https://youtu.be/zWjT_2hFkMw?feature=shared&t=3606
+Object имеет следующие свойства:
+- hasOwnProperty()
+- isPrototypeOf()
+- propertyIsEnumerable()
+- toLocaleString()
+- toString()
+- valueOf()
+
+## Наследование
+Наследование не с помощью прототипа а с помощью класса.
+
+    class Animal {
+      constructor() {
+        this.age = 10;
+      }
+      getEat() {
+        return 'hrumHrumHrum';
+      }
+    }
+
+    class Cat {
+      constructor() {
+        this.mustache = true;
+      }
+      getVoice() {
+        return 'myauMyauMyau';
+      }
+    }
+
+    class Dog {
+      constructor() {
+        this.mustache = false;
+      }
+      getVoice() {
+        return 'auAuAu';
+      }
+    }
+
+    const cat = new Cat();
+    const dog = new Dog();
+
+    console.log(cat); // прототипом является Object
+    console.log(dog);
+
+Чтобы прототипом сделать Animal, нужно прописать слово `extends` и дбавить в конструктор функцию super().
+
+    class Animal {
+      constructor() {
+        this.age = 10;
+      }
+      getEat() {
+        return 'hrumHrumHrum';
+      }
+    }
+
+    class Cat extends Animal {
+      constructor() {
+        super();
+        this.mustache = true;
+      }
+      getVoice() {
+        return 'myauMyauMyau';
+      }
+    }
+
+    class Dog {
+      constructor() {
+        this.mustache = false;
+      }
+      getVoice() {
+        return 'auAuAu';
+      }
+    }
+
+    const cat = new Cat();
+    const dog = new Dog();
+
+    console.log(cat); // прототипом является Animal
+    console.log(cat.age); // 10
+    console.log(dog);
+
+Наследование идет на прототип.  
+У каждого объекта может быть только один прототип.
+
+## Как это работает?
+Как это работает, прототпы и наследование.
+
+Берем простую функцию, если её вызвать, то она будет создавать объект.
+
+    function Animal() {
+      this.age = 10;
+      this.getEat = function() {
+        return 'hrumHrumHrum';
+      }
+    }
+
+    function Cat() {
+      this.mustache = true;
+      this.getVoice = function() {
+        return 'myauMyauMyau';
+      }
+    }
+
+    Cat.prototype = new Animal();
+    console.log(Cat); // function Cat()
+    console.log(Cat.prototype); // Object { age: 10, getEat: getEat() }
+    console.log(Cat.prototype.age); // 10
+
+В старом синтакссие нету super(), поэтому к свойствам родителя нужно обращаться через prototype.
+
+## Что делает super()?
+super() - вызывает родительский конструктор. Аналог super в PHP это `parent::construct`.  
+getEat() -  не в конструкторе, потому что тогда функция будет отнесена не к прототипу, а к объекту (технически так можно сделать см. ниже).
+
+## Передаём параметры
+
+    class Animal {
+      constructor(age) {
+        this.age = age;
+      }
+      getEat() {
+        return 'hrumHrumHrum';
+      }
+    }
+
+    class Cat extends Animal {
+      constructor(age) {
+        super(age);
+        this.mustache = true;
+      }
+      getVoice() {
+        return 'myauMyauMyau';
+      }
+    }
+
+    const cat = new Cat(5);
+
+    console.log(cat);
+    console.log(cat.age); // 5
+
+## Добавляем методы в констурктор
+`this.getEat = function() {` - теперь при выводе объекта, в консоли эта функция находится в объекте, а не в прототипе, разницы нет никакой. Но лучше эту функцию располагать в прототипе (объект будет ссылаться на функцию), а не конструкторе (иза используемой памяти). Если свойство записать в прототип, то каждому коту будет 10 лет.
+
+    // class Animal {
+    //   constructor(age) {
+    //     this.age = age;
+    //   }
+    //   getEat() {
+    //     return 'hrumHrumHrum';
+    //   }
+    // }
+
+    class Animal {
+      constructor(age) {
+        this.age = age;
+        this.getEat = function() {
+          return 'hrumHrumHrum';
+        }
+      }
+    }
+
+    class Cat extends Animal {
+      constructor(age) {
+        super(age);
+        this.mustache = true;
+      }
+      getVoice() {
+        return 'myauMyauMyau';
+      }
+    }
+
+    const cat = new Cat(5);
+
+    console.log(cat);
+    console.log(cat.age); // 5
+
+## Разное
+Проблема нативного JS в отличии от jQuery это то что в JS для работы с несколькими DOM элементами нужно использовать циклы.
+
+С помощью класса создадим аналог jQuery, который избавит нас от постоянного создания циклов для группы элементов:
+
+https://youtu.be/zWjT_2hFkMw?feature=shared&t=5442
