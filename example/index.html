@@ -23,38 +23,13 @@
 </div>
 
 <script>
-// class Animal {
-//   constructor(age) {
-//     this.age = age;
-//   }
-//   getEat() {
-//     return 'hrumHrumHrum';
-//   }
-// }
 
-class Animal {
-  constructor(age) {
-    this.age = age;
-    this.getEat = function() {
-      return 'hrumHrumHrum';
-    }
-  }
+function context() {
+  console.log(this);
 }
 
-class Cat extends Animal {
-  constructor(age) {
-    super(age);
-    this.mustache = true;
-  }
-  getVoice() {
-    return 'myauMyauMyau';
-  }
-}
+context(); // Window
 
-const cat = new Cat(5);
-
-console.log(cat);
-console.log(cat.age); // 5
 </script>
 
 </body>
